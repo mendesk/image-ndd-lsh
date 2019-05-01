@@ -1,7 +1,8 @@
 # LSH for near-duplicate image detection
 This proof-of-concept uses **Locality Sensitive Hashing** for near-duplicate image detection 
-and was inspired by Adrian Rosebrock's article _Fingerprinting Images for Near-Duplicate Detection_.
-(https://realpython.com/fingerprinting-images-for-near-duplicate-detection/) At the end of the article,
+and was inspired by Adrian Rosebrock's article 
+[Fingerprinting Images for Near-Duplicate Detection](https://realpython.com/fingerprinting-images-for-near-duplicate-detection/). 
+At the end of the article,
 the author proposes to use  K-d trees or VP trees to achieve real near-duplicate detection in a 
 scalable way. This page explains how to achieve that with Locality Sensitive Hashing instead.
 
