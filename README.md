@@ -102,6 +102,17 @@ have been prefixed with ```>```:
 >00100111>00011011>01110111>00011011>10100011>10010111>10110010>10000011
 ```
 
+## Code
+```
+##Requirements
+pip install imagehash
+```
+
+```
+Python detect.py -i input
+```
+[ Check the list of other parameters ](https://github.com/pidugusundeep/image-ndd-lsh/blob/2d98f7b31beeb4f5e058910590574db80e09d730/detect.py#L109-L112)
+
 ## References
 - Article: [Fingerprinting Images for Near-Duplicate Detection](https://realpython.com/fingerprinting-images-for-near-duplicate-detection/)
 - How dhash works: [Kind of like that](http://www.hackerfactor.com/blog/index.php?/archives/529-Kind-of-Like-That.html)
