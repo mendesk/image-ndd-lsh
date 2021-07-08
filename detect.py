@@ -69,7 +69,7 @@ def find_near_duplicates(input_dir: str, threshold: float, hash_size: int, bands
         # Locality Sensitive Hashing
         for i in range(bands):
             signature_band = signature[i*rows:(i+1)*rows]
-            signature_band_bytes = signature_band.tostring()
+            signature_band_bytes = signature_band.tobytes()
             if signature_band_bytes not in hash_buckets_list[i]:
                 hash_buckets_list[i][signature_band_bytes] = list()
             hash_buckets_list[i][signature_band_bytes].append(fh)
