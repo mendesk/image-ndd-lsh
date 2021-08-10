@@ -2,3 +2,5 @@
 *.backup
 .mypy_cache/
 preprocessing/
+.idea
+venv
