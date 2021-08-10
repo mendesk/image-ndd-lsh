@@ -2,7 +2,7 @@ import argparse
 import sys
 from os import listdir
 from os.path import isfile, join
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Tuple
 
 import imagehash
 import numpy as np
@@ -20,16 +20,13 @@ def calculate_signature(image_file: str, hash_size: int) -> np.ndarray:
     Returns:
         Image signature as Numpy n-dimensional array or None if the file is not a PIL recognized image
     """
-    try:
-        pil_image = Image.open(image_file).convert("L").resize(
-                            (hash_size+1, hash_size), 
-                            Image.ANTIALIAS)
-        dhash = imagehash.dhash(pil_image, hash_size)
-        signature = dhash.hash.flatten()
-        pil_image.close()
-        return signature
-    except IOError as e:
-        raise e
+    pil_image = Image.open(image_file).convert("L").resize(
+                        (hash_size+1, hash_size),
+                        Image.ANTIALIAS)
+    dhash = imagehash.dhash(pil_image, hash_size)
+    signature = dhash.hash.flatten()
+    pil_image.close()
+    return signature
 
         
 def find_near_duplicates(input_dir: str, threshold: float, hash_size: int, bands: int) -> List[Tuple[str, str, float]]:
@@ -50,11 +47,8 @@ def find_near_duplicates(input_dir: str, threshold: float, hash_size: int, bands
     hash_buckets_list: List[Dict[str, List[str]]] = [dict() for _ in range(bands)]
     
     # Build a list of candidate files in given input_dir
-    try:
-        file_list = [join(input_dir, f) for f in listdir(input_dir) if isfile(join(input_dir, f))]
-    except OSError as e:
-        raise e
-    
+    file_list = [join(input_dir, f) for f in listdir(input_dir) if isfile(join(input_dir, f))]
+
     # Iterate through all files in input directory
     for fh in file_list:
         try:
@@ -100,7 +94,6 @@ def find_near_duplicates(input_dir: str, threshold: float, hash_size: int, bands
     # Sort near-duplicates by descending similarity and return
     near_duplicates.sort(key=lambda x:x[2], reverse=True)
     return near_duplicates
-
 
 
 def main(argv):
