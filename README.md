@@ -6,6 +6,8 @@ At the end of the article,
 the author proposes to use  K-d trees or VP trees to achieve real near-duplicate detection in a 
 scalable way. This page explains how to achieve that with Locality Sensitive Hashing instead.
 
+> **Note**: Instructions on how to run the proof-of-concept code can be found at the [bottom of this page](#running-the-poc-code).
+
 ## Pre-processing: from image to signature
 In this pre-processing step the idea is to compress images into smaller signatures while preserving the
 similarity between the two. If two images are similar, so should their signatures be. It makes sense to
@@ -101,6 +103,19 @@ have been prefixed with ```>```:
 >11011001>00110000>10011011>00111000>10110111>00001000>10100101>10001100
 >00100111>00011011>01110111>00011011>10100011>10010111>10110010>10000011
 ```
+
+## Running the PoC code
+Clone this repository and from within it run:
+```shell
+$ pip install -r requirements.txt  # installs imagehash library and dependencies
+
+$ python3 detect.py -i input
+Found 3 near-duplicate images in input/ (threshold 90.00%)
+99.61% similarity: file 1: input/girl_lights.jpg - file 2: input/girl_lights_shrunk_to_1334x889.jpg
+96.88% similarity: file 1: input/girl_lights_shrunk_to_1334x889.jpg - file 2: input/girl_lights_waldo.jpg
+96.48% similarity: file 1: input/girl_lights.jpg - file 2: input/girl_lights_waldo.jpg
+```
+For other parameters like threshold, hash size, ... run `python3 detect.py --help`
 
 ## References
 - Article: [Fingerprinting Images for Near-Duplicate Detection](https://realpython.com/fingerprinting-images-for-near-duplicate-detection/)
