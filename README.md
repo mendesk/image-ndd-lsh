@@ -109,7 +109,7 @@ Clone this repository and from within it run:
 ```shell
 $ pip install -r requirements.txt  # installs imagehash library and dependencies
 
-$ python3 detect.py -i input
+$ python detect.py -i input
 Found 3 near-duplicate images in input/ (threshold 90.00%)
 99.61% similarity: file 1: input/girl_lights.jpg - file 2: input/girl_lights_shrunk_to_1334x889.jpg
 96.88% similarity: file 1: input/girl_lights_shrunk_to_1334x889.jpg - file 2: input/girl_lights_waldo.jpg

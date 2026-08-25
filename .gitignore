@@ -4,3 +4,4 @@
 preprocessing/
 .idea
 venv
+.python-version

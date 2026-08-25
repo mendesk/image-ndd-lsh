@@ -1,1 +1,1 @@
-ImageHash>=4.2.1
+ImageHash>=4.3.2,<5
