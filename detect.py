@@ -22,7 +22,7 @@ def calculate_signature(image_file: str, hash_size: int) -> np.ndarray:
     """
     pil_image = Image.open(image_file).convert("L").resize(
                         (hash_size+1, hash_size),
-                        Image.ANTIALIAS)
+                        Image.Resampling.LANCZOS)
     dhash = imagehash.dhash(pil_image, hash_size)
     signature = dhash.hash.flatten()
     pil_image.close()
@@ -63,7 +63,7 @@ def find_near_duplicates(input_dir: str, threshold: float, hash_size: int, bands
         # Locality Sensitive Hashing
         for i in range(bands):
             signature_band = signature[i*rows:(i+1)*rows]
-            signature_band_bytes = signature_band.tobytes()
+            signature_band_bytes = signature_band.tobytes().decode()
             if signature_band_bytes not in hash_buckets_list[i]:
                 hash_buckets_list[i][signature_band_bytes] = list()
             hash_buckets_list[i][signature_band_bytes].append(fh)
@@ -83,10 +83,10 @@ def find_near_duplicates(input_dir: str, threshold: float, hash_size: int, bands
     # Check candidate pairs for similarity
     near_duplicates = list()
     for cpa, cpb in candidate_pairs:
-        hd = sum(np.bitwise_xor(
+        hd = np.bitwise_xor(
                 np.unpackbits(signatures[cpa]), 
                 np.unpackbits(signatures[cpb])
-        ))
+        ).sum()
         similarity = (hash_size**2 - hd) / hash_size**2
         if similarity > threshold:
             near_duplicates.append((cpa, cpb, similarity))
